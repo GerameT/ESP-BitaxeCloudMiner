@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { interval, map, Observable, shareReplay, startWith, switchMap, tap } from 'rxjs';
+import { interval, map, Observable, shareReplay, startWith, switchMap, tap, Subject, merge } from 'rxjs';
 import { HashSuffixPipe } from 'src/app/pipes/hash-suffix.pipe';
 import { QuicklinkService } from 'src/app/services/quicklink.service';
 import { ShareRejectionExplanationService } from 'src/app/services/share-rejection-explanation.service';
@@ -24,6 +24,8 @@ export class HomeComponent {
   public temperatureData: number[] = [];
   public powerData: number[] = [];
   public chartData?: any;
+
+  private refreshTrigger$ = new Subject<void>();
 
   public maxPower: number = 0;
   public nominalVoltage: number = 0;
@@ -189,7 +191,7 @@ export class HomeComponent {
     };
 
 
-    this.info$ = interval(5000).pipe(
+    this.info$ = merge(interval(5000), this.refreshTrigger$).pipe(
       startWith(() => this.systemService.getInfo()),
       switchMap(() => {
         return this.systemService.getInfo()
@@ -285,5 +287,9 @@ export class HomeComponent {
     });
 
     return this.calculateAverage(efficiencies);
-  }  
+  }
+
+  public refreshStats() {
+    this.refreshTrigger$.next();
+  }
 }

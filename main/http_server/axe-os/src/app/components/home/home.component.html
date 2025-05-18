@@ -19,6 +19,10 @@
         text="Using fallback pool - Share stats reset. Check Pool Settings and or / reboot Bitaxe">
     </p-message>
 
+    <button id="refreshStatusBtn" class="btn btn-sm btn-light ms-2" (click)="refreshStats()">
+        <i class="bi bi-arrow-clockwise"></i>
+    </button>
+
     <div class="grid" *ngIf="info$ | async as info; else loading">
                 <div class="col-12 md:col-6 xl:col-3">
                     <div class="card mb-0">
