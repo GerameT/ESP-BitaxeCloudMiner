@@ -20,8 +20,4 @@ describe('LogsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should expose connection status', () => {
-    expect(component.connectionStatus$).toBeTruthy();
-  });
 });

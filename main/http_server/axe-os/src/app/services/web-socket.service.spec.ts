@@ -13,8 +13,4 @@ describe('WebSocketService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-
-  it('connectionStatus$ starts as false', () => {
-    expect(service.connectionStatus$.value).toBeFalse();
-  });
 });

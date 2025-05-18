@@ -18,8 +18,6 @@ export class LogsComponent implements OnDestroy, AfterViewChecked {
 
   private websocketSubscription?: Subscription;
 
-  public connectionStatus$ = this.websocketService.connectionStatus$;
-
   public showLogs = false;
 
   public stopScroll: boolean = false;
