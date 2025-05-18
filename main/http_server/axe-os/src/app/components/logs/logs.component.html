@@ -52,6 +52,7 @@
             </h2>
 
             <div *ngIf="showLogs" id="logs" #scrollContainer>
+                <p *ngIf="!(connectionStatus$ | async)" class="text-warning">WebSocket disconnected - recent activity unavailable.</p>
                 <div *ngFor="let log of logs" [ngClass]="log.className">₿ {{log.text | ANSI}}</div>
             </div>
         </div>
